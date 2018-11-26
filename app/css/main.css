@@ -3,4 +3,24 @@
 
 h1 {
   color: pink;
-  text-align: center; }
+  text-align: center;
+  -webkit-transition: all 2s linear;
+  transition: all 2s linear;
+  -webkit-animation: MyAnimation 2s;
+  animation: MyAnimation 2s; }
+
+@-webkit-keyframes MyAnimation {
+  0% {
+    left: 0; }
+  50% {
+    left: 200px; }
+  100% {
+    left: 20px; } }
+
+@keyframes MyAnimation {
+  0% {
+    left: 0; }
+  50% {
+    left: 200px; }
+  100% {
+    left: 20px; } }

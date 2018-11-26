@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var browserSync = require('browser-sync').create();
 var uglify = require('gulp-uglify');
 var cssnano = require('gulp-cssnano');
+var autoprefixer = require('gulp-autoprefixer');
 // use ref is for concatenating js files into one main
 var useref = require('gulp-useref');
 var gulpIf = require('gulp-if');
@@ -32,6 +33,10 @@ gulp.task('browserSync', function () {
 gulp.task('sass', function () {
   return gulp.src(SASS__ALL) // Gets all files ending with .scss in app/scss and children dirs
     .pipe(sass().on('error', sass.logError)) // Passes it through a gulp-sass, log errors to console
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
     .pipe(gulp.dest(CSS__MASTER)) // Outputs it in the css folder
     .pipe(browserSync.reload({ // Reloading with Browser Sync
       stream: true
