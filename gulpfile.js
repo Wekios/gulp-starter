@@ -15,8 +15,8 @@ var runSequence = require('run-sequence');
 
 
 // Path Variables
-var SASS__ALL = 'app/scss/**/*.scss';
-var CSS__MASTER = 'app/css';
+var SASS__ALL = 'development/scss/**/*.scss';
+var CSS__MASTER = 'development/css';
 
 // Development Tasks
 // ----------------
@@ -24,14 +24,14 @@ var CSS__MASTER = 'app/css';
 gulp.task('browserSync', function () {
   browserSync.init({
     server: {
-      baseDir: 'app'
+      baseDir: 'development'
     },
   })
 })
 
 // SASS Task
 gulp.task('sass', function () {
-  return gulp.src(SASS__ALL) // Gets all files ending with .scss in app/scss and children dirs
+  return gulp.src(SASS__ALL) // Gets all files ending with .scss in development/scss and children dirs
     .pipe(sass().on('error', sass.logError)) // Passes it through a gulp-sass, log errors to console
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
@@ -45,9 +45,9 @@ gulp.task('sass', function () {
 
 // Gulp Watch
 gulp.task('watch', function () {
-  gulp.watch('app/scss/**/*.scss', ['sass']);
-  gulp.watch('app/*.html', browserSync.reload);
-  gulp.watch('app/js/**/*.js', browserSync.reload);
+  gulp.watch('development/scss/**/*.scss', ['sass']);
+  gulp.watch('development/*.html', browserSync.reload);
+  gulp.watch('development/js/**/*.js', browserSync.reload);
 });
 
 // Optimization Tasks 
@@ -55,41 +55,41 @@ gulp.task('watch', function () {
 
 // Optimizing CSS and JavaScript 
 gulp.task('useref', function () {
-  return gulp.src('app/*.html')
+  return gulp.src('development/*.html')
     .pipe(useref())
     // Minifies only if it's a JavaScript file
     .pipe(gulpIf('*.js', uglify()))
     // Minifies only if it's a CSS file
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('public_html'))
 });
 
 // Optimizing Images 
 gulp.task('images', function () {
-  return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
+  return gulp.src('development/images/**/*.+(png|jpg|jpeg|gif|svg)')
     // Caching images that ran through imagemin
     .pipe(cache(imagemin({
       interlaced: true
       // build a low-resolution version of the full-sized GIF picture on the screen while the file is still downloading
     })))
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('public_html/images'))
 });
 
 // Copy Fonts 
 gulp.task('fonts', function () {
-  return gulp.src('app/fonts/**/*')
-    .pipe(gulp.dest('dist/fonts'))
+  return gulp.src('development/fonts/**/*')
+    .pipe(gulp.dest('public_html/fonts'))
 })
 
 // Cleaning 
 gulp.task('clean', function () {
-  return del.sync('dist').then(function (cb) {
+  return del.sync('public_html').then(function (cb) {
     return cache.clearAll(cb);
   });
 })
 
-gulp.task('clean:dist', function () {
-  return del.sync(['dist/**/*', '!dist/images', '!dist/images/**/*']);
+gulp.task('clean:public_html', function () {
+  return del.sync(['public_html/**/*', '!public_html/images', '!public_html/images/**/*']);
 });
 
 // Build Sequences
@@ -103,7 +103,7 @@ gulp.task('default', function (callback) {
 
 gulp.task('build', function (callback) {
   runSequence(
-    'clean:dist',
+    'clean:public_html',
     'sass',
     ['useref', 'images', 'fonts'],
     callback
