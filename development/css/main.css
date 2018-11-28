@@ -1,26 +1,119 @@
-* {
-  background-color: blue; }
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit; }
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal; }
+
+ol,
+ul {
+  list-style: none; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+.clearfix::before,
+.clearfix::after {
+  display: table;
+  content: "";
+  clear: both; }
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  background-color: #ffffff;
+  line-height: 1;
+  color: #3a444d; }
+
+body {
+  max-width: 1920px;
+  margin: 0 auto; }
+
+i {
+  font-style: normal; }
+
+html {
+  font-size: 10px; }
+  @media (max-width: 767px) {
+    html {
+      font-size: 1.5625vw; } }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    html {
+      font-size: 1.30208vw; } }
+  @media (min-width: 1024px) {
+    html {
+      font-size: 0.52083vw; } }
+  @media screen and (min-width: 1920) {
+    html {
+      font-size: 10px; } }
+
+.container {
+  margin: 0 auto;
+  width: 87.5vw; }
+  @media (min-width: 768px) {
+    .container {
+      width: 84.24479vw; } }
+  @media (min-width: 1024px) {
+    .container {
+      width: 62.5vw;
+      max-width: 1208px; } }
+
+p {
+  color: #3a444d; }
+
+a {
+  text-decoration: none;
+  color: #ffffff; }
+  a:hover, a:active, a:focus {
+    color: #000000; }
+
+.text--regular {
+  font-weight: 400; }
+
+.text--bold {
+  font-weight: 600; }
+
+.text--bolder {
+  font-weight: 700; }
+
+.text--underline {
+  text-decoration: underline; }
+
+.text--promo {
+  color: #ff0000; }
+
+.text--center {
+  text-align: center; }
+
+.centered {
+  margin: 0 auto; }
+
+.full-width {
+  width: 100%; }
 
 h1 {
-  color: pink;
-  text-align: center;
-  -webkit-transition: all 2s linear;
-  transition: all 2s linear;
-  -webkit-animation: MyAnimation 2s;
-  animation: MyAnimation 2s; }
-
-@-webkit-keyframes MyAnimation {
-  0% {
-    left: 0; }
-  50% {
-    left: 200px; }
-  100% {
-    left: 20px; } }
-
-@keyframes MyAnimation {
-  0% {
-    left: 0; }
-  50% {
-    left: 200px; }
-  100% {
-    left: 20px; } }
+  font-size: 5rem; }
